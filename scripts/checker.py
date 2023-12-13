@@ -2,9 +2,18 @@ from pathlib import Path
 import asyncio
 import sys
 
-msg_run = "RUN  "
-msg_ok = "OK    "
-msg_failed = "FAILED"
+RED_CODE = "\033[91m"
+GREEN_CODE = "\033[92m"
+CYAN_CODE = "\033[96m"
+ENDC_CODE = "\033[0m"
+
+def give_color_str(str: str, color: str):
+    return color + str + ENDC_CODE
+
+msg_run = give_color_str("RUN  ", CYAN_CODE)
+msg_ok = give_color_str("OK    ", GREEN_CODE)
+msg_failed = give_color_str("FAILED", RED_CODE)
+msg_passed = give_color_str("PASSED", GREEN_CODE)
 
 
 def get_tests(tests_dir: Path) -> list[str]:
@@ -78,9 +87,9 @@ def main() -> int:
     tests_dir = Path(sys.argv[2])
     failed_tests: int = asyncio.run(run_all_tests(tests_dir, calculator))
     if failed_tests > 0:
-        print(f"{failed_tests} tests FAILED")
+        print(f"{failed_tests} tests {msg_failed}\n")
         return 1
-    print(f"All tests PASSED")
+    print(f"All tests {msg_passed}\n")
     return 0
 
 
