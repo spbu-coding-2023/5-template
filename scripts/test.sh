@@ -8,8 +8,8 @@ CHECKER="$BASEDIR/checker.py"
 CORRECT="correct"
 INCORRECT="incorrect"
 
-echo "Test basic incorrect tests"
+echo "\033[96mTest basic incorrect tests\033[0m"
 python3 "$CHECKER" "$CALCULATOR" "${TESTDIR}/${INCORRECT}"
 
-echo "Test basic correct tests"
+echo "\033[96mTest basic correct tests\033[0m"
 python3 "$CHECKER" "$CALCULATOR" "${TESTDIR}/${CORRECT}"
